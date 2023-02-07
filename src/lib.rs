@@ -29,9 +29,14 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 }
 
 pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-    for ligne in contenu.lignes() {
-        // faire qqch
+    let mut resultats = Vec::new();
+
+    for ligne in contenu.lines() {
+        if ligne.contains(recherche) {
+            resultats.push(ligne);
+        }
     }
+    resultats
 }
 
 #[cfg(test)]
