@@ -23,6 +23,9 @@ struct Config {
 
 impl Config {
     fn new(args: &[String]) -> Config {
+        if args.len() < 3 {
+            panic!("il n'y a pas assez d'arguments");
+        }
         let recherche = args[1].clone();
         let nom_fichier = args[2].clone();
 
