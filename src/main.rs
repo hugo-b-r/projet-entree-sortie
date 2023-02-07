@@ -16,8 +16,11 @@ fn main() {
     println!("On recherche : {}", config.recherche);
     println!("Dans le fichier : {}", config.nom_fichier);
 
-    run(config);
-    
+    if let Err(e) = run(config) {
+        println!("Erreur applicative : {}", e);
+
+        process::exit(1);
+    }
 }
 
 
