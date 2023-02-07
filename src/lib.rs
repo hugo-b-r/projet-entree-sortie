@@ -25,7 +25,5 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     // -- partie masquée ici --
     let contenu = fs::read_to_string(config.nom_fichier)?;
 
-    println!("Dans le texte :\n{}", contenu);
-
     Ok(())
 }
