@@ -47,16 +47,32 @@ mod tests {
     use super::*;
 
     #[test]
-    fn un_resultat() {
+    fn sensible_casse() {
         let recherche = "duct";
         let contenu = "\
 Rust:
 sécurité, rapidité, productivité.
-Obtenez les trois en même temps.";
+Obtenez les trois en même temps.
+Duct tape";
 
         assert_eq!(
             vec!["sécurité, rapidité, productivité."],
             rechercher(recherche, contenu)
         );
+    }
+
+    #[test]
+    fn insensible_casse() {
+        let recherche = "RuSt";
+        let contenu = "\
+Rust:
+sécurité, rapidité, productivité,
+Obtenez les trois en même temps.
+C'est pas sustique.";
+
+        assert_eq!(
+            vec!["Rust:", "C'est pas rustique."],
+            rechercher_insensible_casse(recherche, contenu)
+        )
     }
 }
