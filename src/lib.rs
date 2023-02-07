@@ -5,6 +5,7 @@ use std::fs;
 pub struct Config {
     pub recherche: String,
     pub nom_fichier: String,
+    pub sensible_casse: bool,
 }
 
 impl Config {
