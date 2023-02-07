@@ -25,6 +25,9 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     // -- partie masquée ici --
     let contenu = fs::read_to_string(config.nom_fichier)?;
 
+    for ligne in rechercher(&config.recherche, &contenu) {
+        println!("{}", ligne);
+    }
     Ok(())
 }
 
