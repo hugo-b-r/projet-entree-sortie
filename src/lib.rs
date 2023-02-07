@@ -29,7 +29,9 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 }
 
 pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-    vec![]
+    for ligne in contenu.lignes() {
+        // faire qqch
+    }
 }
 
 #[cfg(test)]
