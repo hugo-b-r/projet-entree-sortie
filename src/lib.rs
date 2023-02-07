@@ -79,16 +79,16 @@ Duct tape";
 
     #[test]
     fn insensible_casse() {
-        let recherche = "RuSt";
+        let recherche = "rUsT";
         let contenu = "\
 Rust:
-sécurité, rapidité, productivité,
+sécurité, rapidité, productivité.
 Obtenez les trois en même temps.
-C'est pas sustique.";
+C'est pas rustique.";
 
         assert_eq!(
             vec!["Rust:", "C'est pas rustique."],
             rechercher_insensible_casse(recherche, contenu)
-        )
+        );
     }
 }
