@@ -5,7 +5,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     println!("{:?}", args);
 
-    let config = interpreter_config(&args);
+    let config = Config::new(&args);
 
     println!("On recherche : {}", config.recherche);
     println!("Dans le fichier : {}", config.nom_fichier);
@@ -21,9 +21,11 @@ struct Config {
     nom_fichier: String,
 }
 
-fn interpreter_config(args: &[String]) -> Config {
-    let recherche = args[1].clone();
-    let nom_fichier = args[2].clone();
+impl Config {
+    fn new(args: &[String]) -> Config {
+        let recherche = args[1].clone();
+        let nom_fichier = args[2].clone();
 
-    Config { recherche, nom_fichier }
+        Config { recherche, nom_fichier }
+    }
 }
