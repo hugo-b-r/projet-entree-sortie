@@ -20,7 +20,7 @@ impl Config {
         let nom_fichier = args[2].clone();
 
         let sensible_casse = env::var("MINIGREP_INSENSIBLE_CASSE").is_err();
-        
+
         Ok(Config {
             recherche,
             nom_fichier,
@@ -33,12 +33,12 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contenu = fs::read_to_string(config.nom_fichier)?;
 
     let resultats = if config.sensible_casse {
-        rechercher(&config.recherche, &contenu);
+        rechercher(&config.recherche, &contenu)
     } else {
-        rechercher_insensible_casse(&config.recherche, &contenu);
-    }
+        rechercher_insensible_casse(&config.recherche, &contenu)
+    };
 
-    for ligne in rechercher(&config.recherche, &contenu) {
+    for ligne in resultats {
         println!("{}", ligne);
     }
     Ok(())
