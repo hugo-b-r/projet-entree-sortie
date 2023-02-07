@@ -23,9 +23,14 @@ impl Config {
 }
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    // -- partie masquée ici --
     let contenu = fs::read_to_string(config.nom_fichier)?;
 
+    let resultats = if config.sensible_casse {
+        rechercher(&config.recherche, &contenu);
+    } else {
+        rechercher_insensible_casse(&config.recherche, &contenu);
+    }
+    
     for ligne in rechercher(&config.recherche, &contenu) {
         println!("{}", ligne);
     }
