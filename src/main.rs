@@ -1,23 +1,33 @@
 use std::env;
 use std::fs;
 use std::process;
+use std::error::Error;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
     println!("{:?}", args);
 
     let config = Config::new(&args).unwrap_or_else(|err| {
-        println!("Problème rencontré lors de l'interprétation des arguments : {}", err);
+        println!("Problème rencontré lors de l'interprétation des arguments :
+            {}", err);
         process::exit(1);
     });
 
     println!("On recherche : {}", config.recherche);
     println!("Dans le fichier : {}", config.nom_fichier);
 
-    let contenu = fs::read_to_string(config.nom_fichier)
-        .expect("Quelquechose ne s'est pas passé comme prévu lors
-            de la lecture du fchier");
+    run(config);
+    
+}
+
+
+fn run(config:Config) -> Result <(), Box<dyn Error>> {
+    let contenu = fs::read_to_string(config.nom_fichier)?;
+
+            
     println!("Dans le texte: \n{}", contenu);
+
+    Ok(())
 }
 
 struct Config {
