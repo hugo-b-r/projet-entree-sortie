@@ -42,6 +42,22 @@ pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
     resultats
 }
 
+pub fn rechercher_insensible_casse<'a>(
+    recherche: &str,
+    contenu: &'a str
+) -> Vec<&'a str> {
+    let recherche = recherche.to_lowercase();
+    let mut resultats = Vec::new();
+
+    for ligne in contenu.lines() {
+        if ligne.to_lowercase().contains(&recherche) {
+            resultats.push(ligne);
+        }
+    }
+
+    resultats
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
