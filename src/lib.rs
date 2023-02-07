@@ -1,3 +1,4 @@
+use std::env;
 use std::error::Error;
 use std::fs;
 
@@ -18,7 +19,13 @@ impl Config {
         let recherche = args[1].clone();
         let nom_fichier = args[2].clone();
 
-        Ok(Config { recherche, nom_fichier })
+        let sensible_casse = env::var("MINIGREP_INSENSIBLE_CASSE").is_err();
+        
+        Ok(Config {
+            recherche,
+            nom_fichier,
+            sensible_casse,
+        })
     }
 }
 
@@ -30,7 +37,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     } else {
         rechercher_insensible_casse(&config.recherche, &contenu);
     }
-    
+
     for ligne in rechercher(&config.recherche, &contenu) {
         println!("{}", ligne);
     }
